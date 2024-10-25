@@ -1,4 +1,5 @@
 const { Message } = require('../models');
+const { Contact } = require('../models');
 const {getFilteredContacts} = require("./contactController");
 const Sequelize = require("sequelize");
 
@@ -42,6 +43,12 @@ const searchMessages = async (req, res) => {
 
         const messages = await Message.findAll({
             where: messageWhereClause,
+            include: [
+                {
+                    model: Contact,
+                    attributes: ['id', 'contact_name', 'phone_number'],
+                },
+            ],
             raw: true,
         });
 

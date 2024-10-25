@@ -12,5 +12,7 @@ const Message = require('./message');
         console.error('Database synchronization failed:', error);
     }
 })();
+Contact.hasMany(Message, { foreignKey: 'contact_id' });
+Message.belongsTo(Contact, { foreignKey: 'contact_id' });
 
 module.exports = { sequelize, Contact, Message };
